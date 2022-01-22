@@ -4,6 +4,7 @@ typealias EmployeeSet = Set<Employee>
 
 
 fun main(args: Array<String>) {
+
     //'final' variable in Java == var
     var number = 10 // final int number = 10;
     var intNumber:Int // final int intNumber;
@@ -29,11 +30,39 @@ fun main(args: Array<String>) {
         employee2 = Employee("!!", 222)
     }
 
-    //typealias
+    //arrayListOf
+    val names = arrayListOf("aaa", "bbb", "ccc")
+    println(names[2])
+
+    // typealias
     val employees: EmployeeSet
+
+    // equality
+    val employeeOne = Employee("M", 1)
+    val employeeTwo = Employee("J", 2)
+    val employeeThree = Employee("J", 2)
+
+    println(employeeOne === employeeTwo) //false
+    println(employeeTwo === employeeThree) //false
+    println(employeeOne == employeeTwo) //false
+    println(employeeTwo == employeeThree) //true
+
+    val employeeFour = employeeTwo
+    println(employeeFour === employeeTwo) //true
+
+    println(employeeFour != employeeTwo) //false
+    println(employeeFour !== employeeTwo) //false
+    println(employeeTwo != employeeThree) //false
+    println(employeeTwo !== employeeThree) //true
 
 }
 
 class Employee(var name: String, val id: Int){
 
+    override fun equals(obj: Any?) : Boolean {
+        if(obj is Employee){
+            return name == obj.name && id == obj.id
+        }
+        return false
+    }
 }
