@@ -1,4 +1,6 @@
 # kotlin-practice
+
 my first kotlin
 
-> https://invited-softball-75b.notion.site/Kotlin-6670c0d1781f4fdd83fb1c465876a2a4
+
+> 컽린 https://invited-softball-75b.notion.site/Kotlin-ab0f529cdb0f44099db7e32f0694ddcf
