@@ -1,6 +1,5 @@
 package jiyeon.kotlin.com
 
-import java.util.*
 
 fun main(args: Array<String>) {
 
