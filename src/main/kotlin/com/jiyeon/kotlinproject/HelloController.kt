@@ -16,6 +16,4 @@ class HelloController {
     // also ok
     @GetMapping("/world")
     fun helloWorld(): String = "Hello this is world :D"
-
-
 }
