@@ -1,18 +1,10 @@
 package com.jiyeon.kotlinproject.model
 
-class Bank {
-
-    private var accountNumber: String
-    private var trust: Double
-    private var transactionFee: Int
-
-    constructor(accountNumber: String, trust: Double, transactionFee: Int){
-        this.accountNumber = accountNumber
-        this.trust = trust
-        this.transactionFee = transactionFee
-    }
-
-    fun getAccountNumber(): String = accountNumber
+data class Bank (
+    val accountNumber: String,
+    val trust: Double,
+    val transactionFee: Int
+){
 
     override fun toString(): String {
         return "Bank(accountNumber='$accountNumber', trust=$trust, transactionFee=$transactionFee)"
@@ -37,6 +29,5 @@ class Bank {
         result = 31 * result + transactionFee
         return result
     }
-
 
 }
