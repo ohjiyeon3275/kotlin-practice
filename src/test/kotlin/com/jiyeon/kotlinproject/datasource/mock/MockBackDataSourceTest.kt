@@ -15,7 +15,7 @@ internal class MockBackDataSourceTest{
         //given == arrange
 
         //when == act
-        val banks = mockDataSource.getBanks()
+        val banks = mockDataSource.retrieveBanks()
 
         //then == assert
         assertThat(banks.size).isGreaterThanOrEqualTo(3)
@@ -24,7 +24,7 @@ internal class MockBackDataSourceTest{
     @Test
     fun `should provide some mock data`() {
         // when
-        val banks = mockDataSource.getBanks()
+        val banks = mockDataSource.retrieveBanks()
 
         // then
         assertThat(banks).allMatch { it.accountNumber.isNotBlank() }
