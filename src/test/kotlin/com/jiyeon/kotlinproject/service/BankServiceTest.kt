@@ -11,7 +11,7 @@ internal class BankServiceTest {
 
     private val dataSource: BankDataSource = mockk(relaxed = true)
     //when using mockk, you should specify its behavior to where method called -> given part
-    
+
     private val bankService = BankService(dataSource)
 
     @Test
