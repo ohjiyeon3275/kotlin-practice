@@ -12,6 +12,5 @@ class BankController (
     private val bankService: BankService
 ){
     @GetMapping
-    fun getBanks(): Collection<Bank> = bankService.getBanks()
-
+    fun getBanks(): String = "for test..."
 }
