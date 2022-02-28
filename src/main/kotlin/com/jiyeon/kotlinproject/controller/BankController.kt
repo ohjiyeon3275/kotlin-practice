@@ -3,6 +3,7 @@ package com.jiyeon.kotlinproject.controller
 import com.jiyeon.kotlinproject.model.Bank
 import com.jiyeon.kotlinproject.service.BankService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -12,5 +13,8 @@ class BankController (
     private val bankService: BankService
 ){
     @GetMapping
-    fun getBanks(): String = "for test..."
+    fun getBanks(): Collection<Bank> = bankService.getBanks()
+
+    @GetMapping("/{accountNumber}")
+    fun getBank(@PathVariable accountNumber: String) = bankService.getBank(accountNumber)
 }
