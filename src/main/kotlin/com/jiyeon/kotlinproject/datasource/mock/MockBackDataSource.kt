@@ -48,4 +48,12 @@ class MockBackDataSource: BankDataSource {
 
         return bank
     }
+
+    override fun deleteBank(accountNumber: String) {
+
+        val currentBank = banks.firstOrNull{ it.accountNumber == accountNumber }
+            ?: throw NoSuchElementException("~~")
+
+        banks.remove(currentBank)
+    }
 }
