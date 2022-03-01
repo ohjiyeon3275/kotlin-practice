@@ -19,14 +19,16 @@ internal class BankControllerTest{
     @Autowired
     lateinit var mockMvc: MockMvc
 
+    val baseUrl = "/api/banks"
+
     @Nested
     @DisplayName("getBanks()")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    inner class getBanks {
+    inner class GetBanks {
         @Test
         fun `should return all banks`() {
             //when
-            mockMvc.get("/api/banks")
+            mockMvc.get("$baseUrl")
                 .andDo{ print() }
 
                 //then
@@ -48,7 +50,7 @@ internal class BankControllerTest{
             val accountNumber = 1234
 
             //when/then
-            mockMvc.get("/api/banks/$accountNumber")
+            mockMvc.get("$baseUrl/$accountNumber")
                 .andDo { print() }
                 .andExpect {
                     status{ isOk() }
@@ -61,16 +63,18 @@ internal class BankControllerTest{
 
     }
 
+    @Test
+    fun `should return NFE if the account number does not exist` () {
 
-    /**
-     * test run할때 using
-     * gradle?
-     * intelij?
-     * build.execution.deployment -> build tools -> gradle
-     *
-     * @Nested
-     *  계층구조의 테스트를 가능하게 해줌
-     *  그냥 @Test로 한것보다 한번 더 감싸주었다.
-     *
-     */
+        //given
+        val accountNumber = "does_not_exist"
+
+        //when
+        mockMvc.get("$baseUrl/$accountNumber")
+            .andDo { print() }
+            .andExpect { status { isNotFound() } }
+        //then
+
+
+    }
 }
