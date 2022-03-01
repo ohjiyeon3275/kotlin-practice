@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.*
 
 @SpringBootTest
@@ -19,13 +20,13 @@ internal class BankControllerTest @Autowired constructor(
     val objectMapper: ObjectMapper
 ){
 
-
     val baseUrl = "/api/banks"
 
     @Nested
     @DisplayName("get /api/banks")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class GetBanks {
+
         @Test
         fun `should return all banks`() {
             //when
@@ -66,6 +67,7 @@ internal class BankControllerTest @Autowired constructor(
 
     @Test
     fun `should return NFE if the account number does not exist` () {
+
         //given
         val accountNumber = "does_not_exist"
 
@@ -210,15 +212,22 @@ internal class BankControllerTest @Autowired constructor(
     }
 
 
-    @Test
-    fun `should return Not Found if no bank with given account number exists` () {
-        //given
-        val invalidAccountNumber = "does-not-exist"
+    @Nested
+    @DisplayName("delete /api/banks/{accountNumber}")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class DeleteBank {
 
-        //when
-        mockMvc.delete("$baseUrl/$invalidAccountNumber")
-            .andDo { print() }
-            .andExpect { status { isNotFound() } }
+        @Test
+        @DirtiesContext
+        fun `should return Not Found if no bank with given account number exists`() {
+
+            //given
+            val invalidAccountNumber = "does-not-exist"
+
+            //when
+            mockMvc.delete("$baseUrl/$invalidAccountNumber")
+                .andDo { print() }
+                .andExpect { status { isNotFound() } }
+        }
     }
-    
 }
