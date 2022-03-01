@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -126,6 +124,68 @@ internal class BankControllerTest @Autowired constructor(
         performPost
             .andDo { print() }
             .andExpect { status { isBadRequest() } }
+    }
+
+    @Nested
+    @DisplayName("should update an existing bank")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class PatchExistingBank {
+
+        @Test
+        fun `should update an existing bank` () {
+
+            //given
+            val updateBank = Bank("1234", 1.0, 9)
+
+            //when
+            val performPatch = mockMvc.patch(baseUrl) {
+                contentType = MediaType.APPLICATION_JSON
+                content = objectMapper.writeValueAsString(updateBank)
+            }
+
+            //then
+            performPatch
+                .andDo { print() }
+                .andExpect {
+                    status {
+                        isOk()
+                    }
+                    content {
+                        contentType(MediaType.APPLICATION_JSON)
+                        json(objectMapper.writeValueAsString(updateBank))
+                    }
+                }
+
+
+            mockMvc.get("$baseUrl/${updateBank.accountNumber}")
+                .andExpect {
+                    content{
+                        json(objectMapper.writeValueAsString(updateBank))
+                    }
+                }
+
+        }
+
+    }
+
+    @Test
+    fun `should return Bad Request if no bank with given account number exists` () {
+
+        //given
+        val invalidBank = Bank("doesnot exixts", 1.0, 1)
+
+        //when
+        val performPatch = mockMvc.patch(baseUrl) {
+            contentType = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(invalidBank)
+        }
+
+        //then
+        performPatch
+            .andDo{ print() }
+            .andExpect {
+                status{ isNotFound() }
+            }
     }
 
 
