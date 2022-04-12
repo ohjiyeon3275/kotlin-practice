@@ -23,6 +23,8 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.10.4")
+	implementation( "com.beust:klaxon:5.5")
+
 }
 
 tasks.withType<KotlinCompile> {
