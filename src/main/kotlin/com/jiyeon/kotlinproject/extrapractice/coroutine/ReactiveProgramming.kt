@@ -1,4 +1,4 @@
-package com.jiyeon.kotlinproject.crt
+package com.jiyeon.kotlinproject.extrapractice.coroutine
 
 fun main() {
     var num = 4

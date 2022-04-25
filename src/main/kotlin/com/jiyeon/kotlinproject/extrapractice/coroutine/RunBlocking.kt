@@ -1,4 +1,4 @@
-package com.jiyeon.kotlinproject.crt
+package com.jiyeon.kotlinproject.extrapractice.coroutine
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

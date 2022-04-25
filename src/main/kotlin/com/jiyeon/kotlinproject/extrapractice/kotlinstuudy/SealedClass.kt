@@ -1,4 +1,4 @@
-package com.jiyeon.kotlinproject.kotlinstuudy
+package com.jiyeon.kotlinproject.extrapractice.kotlinstuudy
 
 sealed class Employee
 

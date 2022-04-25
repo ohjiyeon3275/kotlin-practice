@@ -1,4 +1,4 @@
-package com.jiyeon.kotlinproject.kotlinstuudy
+package com.jiyeon.kotlinproject.extrapractice.kotlinstuudy
 
 data class Bankie(val id: Long, val name: String)
 
