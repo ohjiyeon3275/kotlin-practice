@@ -2,6 +2,10 @@ package com.jiyeon.kotlinproject.extrapractice.kotlinstuudy
 
 data class Bankie(val id: Long, val name: String)
 
+fun getBankie (id: Long, name: String) {
+
+}
+
 /**
  *
  * data class의 프로퍼티를 var이 아닌 val로 사용 하면 데이터의 신뢰성을 높일 수 있다.
